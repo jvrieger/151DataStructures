@@ -1,0 +1,20 @@
+zipcode: Bryn Mawr, PA 40.02 -75.31 21103
+zipcode: Jayuya, PR 18.22 -66.59 16784
+zipcode: Brooklyn, NY 40.64 -73.94 99598
+zipcode: Saint Petersburg, FL 27.75 -82.64 7407
+zipcode: Pineville, KY 36.76 -83.7 10362
+zipcode: Hinckley, MN 46.01 -92.93 4940
+zipcode: Shiprock, NM 36.79 -108.69 11967
+zipcode: Chevy Chase, MD 38.98 -77.08
+zipcode: Fremont, NE 41.44 -96.49
+zipcode: Seminole, OK 35.23 -96.64
+zipcode: Santa Barbara, CA 34.42 -119.86
+zipcode: Trenton, NJ
+zipcode: Washington, DC
+zipcode: Bend, OR
+zipcode: Ketchikan, AK 55.34 -131.64
+zipcode: No such zipcode
+zipcode: No such zipcode
+zipcode: No such zipcode
+zipcode: No such zipcode
+zipcode: Good Bye!

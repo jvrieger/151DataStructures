@@ -1,0 +1,17 @@
+This directory contains most Popular Names given to newborn babies as 
+recorded at the Social Security Administration.
+
+Source: http://www.ssa.gov/OACT/babynames
+
+File format:
+
+Each line contains the following comma-separated fields:
+
+the rank
+male name
+# of males given that name 
+female name, 
+# of females given that name
+
+The files names1990.csv, ... names2017.csv, etc each contain data for the corresponding year. 
+
