@@ -1,0 +1,10 @@
+public class CSStudent extends Human {
+
+
+    public CSStudent() {
+	this.name = "CSStudent";
+	this.sound = "I love programming!";
+    }
+
+    
+}

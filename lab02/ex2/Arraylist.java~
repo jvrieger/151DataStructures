@@ -1,0 +1,69 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+
+public class Arraylist {
+    
+    public static void main(String[] args) throws FileNotFoundException {
+
+	//create and populate arraylist
+	ArrayList<Integer> lst = new ArrayList<Integer>();
+	Scanner input = new Scanner(new File("nums.txt"));
+        while(input.hasNextLine()) {
+	    String line = input.nextLine();
+	    int temp = Integer.parseInt(line);
+	    lst.add(temp);
+	}
+	input.close();
+
+	//print list
+	for(int i = 0; i < lst.size(); i++) {
+	    System.out.print(lst.get(i) + ", ");
+	}
+	
+	System.out.println();
+	System.out.println("~~~~~~~~~~~~~~~");
+	System.out.println();
+
+	//print list backwards
+      	for(int i = 0; i < lst.size(); i++) {
+	    System.out.print(lst.get(99-i) + ", ");
+	}
+
+       	System.out.println();
+	System.out.println("~~~~~~~~~~~~~~~");
+	System.out.println();
+	
+	//print average
+	double total = 0.0;
+	for(int i = 0; i < lst.size(); i++) {
+	    total += lst.get(i);
+	}
+	System.out.println("Average: " + total/lst.size());
+
+       	System.out.println();
+	System.out.println("~~~~~~~~~~~~~~~");
+	System.out.println();
+
+	//print only odd numbers
+	for(int i = 0; i < lst.size(); i = i + 2) {
+	    System.out.print(lst.get(i) + ", ");
+	}
+
+	System.out.println();
+	System.out.println("~~~~~~~~~~~~~~~");
+	System.out.println();
+
+	//print 200 in fron, 400 in middle, and 300 at end
+	System.out.print(200 + ", ");
+	for(int i = 0; i < lst.size()/2-1; i++) {
+	    System.out.print(lst.get(i) + ", ");
+	}
+	System.out.print(400 + ", ");
+	for(int i = lst.size()/2; i < lst.size(); i++) {
+	    System.out.print(lst.get(i) + ", ");
+	}
+	System.out.print(300);
+    }
+}

@@ -1,0 +1,113 @@
+public class CitySLL {
+    private static class Node {
+	private City data;
+	private Node next;
+
+	public Node(City data, Node next) {
+	    this.data = data;
+	    this.next = next;
+	}
+
+	public City getData() {
+	    return this.data;
+	}
+
+	public Node getNext() {
+	    return this.next;
+	}
+	
+	public void setNext(Node n) {
+	    this.next = n;
+	}
+    }
+
+    private Node head = null;
+    private Node tail = null;
+    private int size = 0;
+
+    public CitySLL() {};
+
+    public int size() {
+	return this.size;
+    }
+
+    public boolean isEmpty() {
+	return size == 0;
+    }
+
+    public City first() {
+	if (isEmpty()) {
+	    return null;
+	}
+	else {
+	    return head.getData();
+	}
+    }
+
+    public City last() {
+	if (isEmpty()) {
+	    return null;
+	}
+	else {
+	    return tail.getData();
+	}
+    }
+
+    public void addLast(City data) {
+	Node newest = new Node(data, null);
+
+	if(isEmpty()) {
+	    head = newest;
+	}
+	else {
+	    tail.setNext(newest);
+	}
+	tail = newest;
+	size++;
+    }
+
+    public void addFirst(City data) {
+	head = new Node(data, head);
+
+	if (isEmpty()) {
+	    tail = head;
+	}
+	size++;
+    }
+
+    public City removeFirst() {
+	if (isEmpty()) {
+	    return null;
+	}
+
+	City target = head.getData();
+	head = head.getNext();
+	size--;
+	if (isEmpty()) {
+	    tail = null;
+	}
+	return target;
+    }
+
+    public City find (String name) {
+	for(Node n = head; n != null; n=n.getNext()) {
+	    City data = n.getData();
+	    if (data.getName().equals(name)) {
+		return data;
+	    }
+	}
+	return null;
+    }
+
+    @Override
+    public String toString() {
+	String s = new String();
+	for (Node n = head; n != null; n = n.getNext()) {
+	    s = s + n.getData();
+	    if (n != tail) {
+		s = s + ",\n";
+	    }
+	}
+	return s;
+    }
+}

@@ -1,0 +1,40 @@
+public class Mammal {
+    
+    private String name;
+    private String sound;
+
+    public Mammal() {
+
+	this.name = "";
+	this.sound = "";
+	
+    }
+
+    public String getName() {
+	return this.name;
+    }
+
+    public String getSound() {
+	return this.sound;
+    }
+
+    public void setName(String name) {
+	this.name = name;
+    }
+
+    public void setSound(String sound) {
+	this.sound = sound;
+    }
+
+    public void speak() {
+	System.out.print(getSound());
+    }
+
+    public boolean laysEggs() {
+	return true;
+    }
+
+    public boolean livesInWater() {
+	return true;
+    }
+}
