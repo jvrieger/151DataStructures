@@ -1,0 +1,69 @@
+public class LinkedBinaryTree<E extends Comparable<E>> implements LabBinaryTree<E> {
+
+    private int size;
+    private int height;
+    private Node<E> root;
+
+    private class Node<E> {
+	private E data;
+	private Node<E> left;
+	private Node<E> right;
+
+	public Node<E>(E data, Node<E> left, Node<E> right) {
+	    this.data = data;
+	    this.left = left;
+	    this.right = right;
+	}
+	public E getData() {
+	    return this.data;
+	}
+	public Node<E> getLeft() { 
+	    return this.left;
+	}
+	public Node<E> getRight() {
+	    return this.right;
+	}
+	public void setData(E data) {
+	    this.data = data;
+	}
+	public void setLeft(Node<E> left) {
+	    this.left = left;
+	}
+	public void setRight(Node<E> right) {
+	    this.right = right;
+	}
+	public boolean isLeaf() {
+	    return this.left == null && this.right == null;
+	}
+    }
+    
+    public int size() {
+	return this.size;
+    }
+    
+    public boolean isEmpty() {
+	return this.size == 0;
+    }
+    
+    public void insert(E element) {
+	
+
+    }
+    
+    boolean contains(E element) {
+
+    }
+    
+    int height() {
+
+    }
+    
+    /*
+     * prints out the nodes of the binary tree in
+     * in-order traversal order
+     */
+    public void printInOrder() {
+
+    }
+
+}

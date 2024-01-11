@@ -1,0 +1,44 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static final int CAPACITY = 43201;
+    public static void main(String[] args) {
+
+	try {
+	    
+	    ProbeHashMap<String, String> hash = new ProbeHashMap<String, String>(CAPACITY); //reasonable large prime number
+
+	    //READING DICTIONARY
+	    Scanner input = new Scanner(new File("dictionary.txt"));
+
+	    while (input.hasNextLine() == true) {
+		String line = input.nextLine();
+		hash.put(line, line);
+	    }
+	    input.close();
+
+	    //System.out.print(hash.entrySet());
+	    System.out.println("average number of probes during insertions: " + hash.averageProbes());
+	    System.out.println("max number of probes during insertions: " + hash.maxProbes());
+	    System.out.println("load_factor after insertions: " + ((double) hash.size()/CAPACITY)); //num entries/capacity
+
+	    //READING SEARCH
+	    Scanner input1 = new Scanner(new File("search.txt"));
+
+	    while (input1.hasNextLine() == true) {
+		String line = input1.nextLine();
+		//search for each line in the hashtable
+
+		//if word is found print it back out
+
+		//if not found assume it is mispelled: list likely suspects
+	    }
+	    input1.close();
+	}
+
+	catch(FileNotFoundException e) {
+	    System.out.println("File Not Found");
+	}
+    }
+}

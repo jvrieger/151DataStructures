@@ -1,0 +1,190 @@
+public class AVLTree<E extends Comparable<E>> extends LinkedBinaryTree<E> {
+
+    public AVLTree(E rootData) {
+	super(rootData);
+    }
+
+    @Override
+    public void insert(E element) {
+        setRootNode(insertRec(getRootNode(), element));
+	rebalance(getRootNode());
+    }
+
+    private Node<E> insertRec(Node<E> root, E key) {
+	if (root == null) {
+	    Node<E> newest = new Node<E>(key, null, null);
+	    incSize();
+	    newest.setHeight(calcHeight(newest));
+	    return newest;
+	}
+	else if (root.getData().compareTo(key) == 0) {
+	    root.setData(key);
+	    return root;
+	}
+	else if (root.getData().compareTo(key) > 0) {
+	    root.setLeft(insertRec(root.getLeft(), key));
+	    root.getLeft().setParent(root);
+	    rebalance(root);
+	}
+	else if (root.getData().compareTo(key) < 0) {
+	    root.setRight(insertRec(root.getRight(), key));
+	    root.getRight().setParent(root);
+	    rebalance(root);
+	}
+	return root;
+    }
+
+    /**
+     * removes an element from a tree
+     * @return boolean true if element existed and was removed
+     * and false if element didn't exist in tree
+     */
+    @Override
+    public boolean remove(E element) {
+	if (!contains(element)) {
+	    return false;
+	}
+	else {
+	    removeRec(getRootNode(), element);
+	    return true;
+	}
+    }
+
+    private Node<E> removeRec(Node<E> root, E key) {
+	if (root == null) {
+	    return null;
+	}
+	//find node to remove
+	if (root.getData().compareTo(key) > 0) {
+	    //serach left until found then set node-to-remove's left child to the next in line
+	    root.setHeight(calcHeight(root));
+	    root.getLeft().setParent(root);
+	    root.setLeft(removeRec(root.getLeft(), key));
+	    rebalance(root);
+	}
+	else if (root.getData().compareTo(key) < 0) {
+	    root.setHeight(calcHeight(root));                    
+	    root.getRight().setParent(root);
+	    root.setRight(removeRec(root.getRight(), key));
+	    rebalance(root);
+	}
+	//root now equals node to remove
+	else {
+	    //if node is a leaf return null
+	    if (root.getLeft() == null && root.getRight() == null) {
+		return null;
+	    }
+	    //if node has a right child return that
+	    else if (root.getLeft() == null) {
+		return root.getRight();
+	    }
+	    //if node has a left child return that
+	    else if (root.getRight() == null) {
+		
+		return root.getLeft();
+	    }
+	    //if node has 2 children set root to minKey of right subtree and move all right nodes up
+	    else {
+		root.setData(minKey(root.getRight()));
+		root.setRight(removeRec(root.getRight(), root.getData()));
+     	    }
+	}
+	return root;
+    }
+
+    public Node<E> rebalance(Node<E> n) {
+	//null checks
+	if (n == null) {
+	    return null;
+	}
+	if (getRootElement() == null) {
+	    return null;
+	}
+	if (n.getLeft() == null || n.getRight() == null) {
+	    return null;
+	}
+	n.setHeight(calcHeight(n)); //update height from children
+
+	int lh = n.getLeft().getHeight();
+	int rh = n.getRight().getHeight();
+	if (n.getLeft().getLeft() == null || n.getLeft().getRight() == null) {
+	    return null;
+	}
+	if (lh > rh + 1) { //left subtree too tall
+	    int llh = n.getLeft().getLeft().getHeight();
+	    int lrh = n.getLeft().getRight().getHeight();
+	    if (llh >= lrh) {
+		return rotateRight(n); //left left rotation
+	    }
+	    else {
+		return rotateLeftRight(n); //left right rotation
+	    }
+	}
+	if (n.getRight().getLeft() == null || n.getRight().getRight() == null) {
+	    return null;
+	}
+	else if (rh > lh+1) { //right subtree too tall
+	    int rlh = n.getRight().getLeft().getHeight();
+	    int rrh = n.getRight().getRight().getHeight();
+	    if (rlh >= rrh) {
+		return rotateLeft(n); //left left rotation
+	    }
+	    else {
+		return rotateRightLeft(n); //left right rotation
+	    }
+	}
+	else {
+	    return n; //no rotation (balanced)
+	}
+    }
+
+    private Node<E> rotateRight(Node<E> r) {
+	Node<E> p = r.getLeft();
+	r.setLeft(p.getRight());
+	p.setRight(r);
+
+        updateHeight(r);
+	updateHeight(p);
+
+	//let caller set parent
+	//return new subtree root
+	return p;
+    }
+    
+    private Node<E> rotateLeft(Node<E> r) {
+	Node<E> p = r.getRight();
+	r.setRight(p.getLeft());
+	p.setLeft(r);
+
+	updateHeight(r);
+	updateHeight(p);
+
+	//let caller set parent
+	//return new subtree root
+	return p;
+    }
+
+    private Node<E> rotateLeftRight(Node<E> r) {
+	r.setLeft(rotateLeft(r.getLeft()));
+	return rotateRight(r);
+    }
+
+    private Node<E> rotateRightLeft(Node<E> r) {
+	r.setRight(rotateRight(r.getRight()));
+	return rotateLeft(r);
+    }
+
+    private void updateHeight(Node<E> n) {
+	int lh = n.getLeft().getHeight();
+	int rh = n.getRight().getHeight();
+	int height;
+	if (lh > rh) {
+	    height = 1+lh;
+	}
+	else {
+	    height = 1+rh;
+	}
+	n.setHeight(height);
+	System.out.println("updateHeight: " + n);
+    }
+}

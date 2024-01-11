@@ -1,0 +1,6 @@
+public class DoubleStack {
+
+    E[] theArray;
+    int top1;
+    int top2;
+}
